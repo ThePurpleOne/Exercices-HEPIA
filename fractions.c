@@ -164,5 +164,7 @@ fraction fraction_sub(fraction fr1, fraction fr2)
 
 double fraction_to_double(fraction fr1)
 {
+	long x = fr1.num / fr1.den;
+	printf("%ld", x);
 	return(fr1.num / fr1.den);
 }

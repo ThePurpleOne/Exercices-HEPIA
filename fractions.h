@@ -1,6 +1,9 @@
 #ifndef _FRACTIONS_H_
 #define _FRACTIONS_H_
 
+
+//http://malaspinas.academy/
+
 //############## Variables Globales et structs ##############
 typedef struct 
 {
