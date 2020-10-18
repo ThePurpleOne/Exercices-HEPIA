@@ -1,10 +1,10 @@
 /*===========================================================================*
-   Exercice : Exercice 3 Fractions
    Auteur   : STIRNEMANN Jonas
    Date création : 29/09/2020
-  =============================================================================
-   Descriptif: Permet de créer, gérer et effectuer des calculs avec des fractions
+=============================================================================
+   Descriptif: lib allowing to create and manage fraction objetcs 
 =*===========================================================================*/
+
 #include <stdio.h>
 #include <math.h>
 #include "fractions.h"
@@ -125,7 +125,7 @@ fraction fraction_mul(fraction fr1, fraction fr2)
 }
 
 /*---------------------------------------------------------------------------
-	fraction_div()(fraction fr1, fraction fr2)
+	fraction_div(fraction fr1, fraction fr2)
 	-------------------------------------------------------------------------
 	Description	: 	Divide and return a fraction
 	Input		:	struct fraction, struct fraction 2
@@ -144,7 +144,7 @@ fraction fraction_div(fraction fr1, fraction fr2)
 }
 
 /*---------------------------------------------------------------------------
-	fraction_sub()(fraction fr1, fraction fr2)
+	fraction_sub(fraction fr1, fraction fr2)
 	-------------------------------------------------------------------------
 	Description	:	substract and return a fraction
 	Input		:	struct fraction, struct fraction 2 
@@ -162,9 +162,15 @@ fraction fraction_sub(fraction fr1, fraction fr2)
 	return( reductFraction(returnFr) );
 }
 
+
+/*---------------------------------------------------------------------------
+	fraction_to_double(fraction)
+	-------------------------------------------------------------------------
+	Description	:	get the real result of a fraction object
+	Input		:	fraction 
+	output		:	double  
+*---------------------------------------------------------------------------*/
 double fraction_to_double(fraction fr1)
 {
-	long x = fr1.num / fr1.den;
-	printf("%ld", x);
-	return(fr1.num / fr1.den);
+	return((double)fr1.num / (double)fr1.den);
 }

@@ -5,28 +5,17 @@
 int main(int argc, char const *argv[])
 {
 	fraction fr1;
-	fraction frBuffer;
-	fr1.num = 1;
-	fr1.den = 1;
-	frBuffer.num = 1;
-	frBuffer.den = 1;
-	printf("%ld", fraction_to_double(fr1));
+	double pi;
 
 	
-	for (long n = 2; n < 100; n++)
+	for (long n = 1; n < 999999; n++)
 	{
-		frBuffer.num = pow( (1), (n+1));
-		frBuffer.den = pow(n, 2);
-		printFraction(frBuffer);
-		printf("\n");
-		fr1 = fraction_mul(fr1, frBuffer);
+		fr1.num = pow( (-1), (n+1));
+		fr1.den = n * n;
+		pi += fraction_to_double(fr1);
 	}
 	
-	frBuffer.num = 12;
-	frBuffer.den = 1;
-	fr1 = fraction_mul(fr1, frBuffer);
-
-	printf("%ld", fraction_to_double(fr1));
+	printf("Pi = %lf\n", sqrt(pi*12));
 
 	return 0;
 }
