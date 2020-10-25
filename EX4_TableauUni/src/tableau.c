@@ -105,13 +105,14 @@ void ReplaceLastByBiggest(int sizeOfTab, int *tab)
 	biggestIndex = GetIndexOfValue(sizeOfTab, tab, biggest);
 	
 	//get the value of the last index 
-	bufferLast = *(tab + sizeOfTab); 
+	bufferLast = *(tab + sizeOfTab - 1); 
 
 	//put the last value at the biggest value index
 	*(tab + biggestIndex) = bufferLast;
 
 	//put the biggest value at last index 
-	*(tab + sizeOfTab) = biggest;
+	*(tab + sizeOfTab - 1) = biggest;
+
 }
 
 
