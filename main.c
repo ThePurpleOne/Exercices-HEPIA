@@ -7,7 +7,6 @@ int main(int argc, char const *argv[])
 	fraction fr1;
 	double pi;
 
-	
 	for (long n = 1; n < 999999; n++)
 	{
 		fr1.num = pow( (-1), (n+1));

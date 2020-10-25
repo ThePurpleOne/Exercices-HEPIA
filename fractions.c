@@ -174,3 +174,4 @@ double fraction_to_double(fraction fr1)
 {
 	return((double)fr1.num / (double)fr1.den);
 }
+
