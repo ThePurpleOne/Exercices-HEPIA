@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include <math.h>
-#include "fractions.h"
+#include "../headers/fractions.h"
 
 /*---------------------------------------------------------------------------
 	printFraction(fraction fr)
