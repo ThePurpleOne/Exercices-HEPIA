@@ -8,14 +8,9 @@
 #include <stdio.h>
 #include "../headers/tableau.h"
 
-
-/*---------------------------------------------------------------------------
-	PrintTab(int sizeOfTab, int *tab )
-	-------------------------------------------------------------------------
-	Description	:	Print a tab
-	Input		:	int array size, pointer to array  
-	output		:	
-*---------------------------------------------------------------------------*/
+///  Print a tab
+/// @param sizeOfTab Size of array
+/// @param tab Array you want to print
 void PrintTab(int sizeOfTab, int *tab )
 {
 	for (long i = 0; i < sizeOfTab; i++)
@@ -24,13 +19,11 @@ void PrintTab(int sizeOfTab, int *tab )
 	}
 }
 
-/*---------------------------------------------------------------------------
-	FindSmallestValueInTab(int sizeOfTab, int *tab)
-	-------------------------------------------------------------------------
-	Description	:	Find the smallest value contained in a given array
-	Input		:	int array size, pointer to array  
-	output		:	int smallest value 
-*---------------------------------------------------------------------------*/
+
+///  Return the smallest value contained in a given array
+/// @param sizeOfTab Size of array
+/// @param tab Array you're looking in
+/// @return smallest value
 int FindSmallestValueInTab(int sizeOfTab, int *tab )
 {
 	int smallestValue = sizeOfTab;
@@ -46,13 +39,11 @@ int FindSmallestValueInTab(int sizeOfTab, int *tab )
 	return smallestValue;
 }
 
-/*---------------------------------------------------------------------------
-	FindBiggestValueInTab(int sizeOfTab, int *tab)
-	-------------------------------------------------------------------------
-	Description	:	Find the Biggest value contained in a given array
-	Input		:	int array size, pointer to array  
-	output		:	int Biggest value 
-*---------------------------------------------------------------------------*/
+
+///  Return the Biggest value contained in a given array
+/// @param sizeOfTab Size of array
+/// @param tab Array you're looking in
+/// @return biggest value
 int FindBiggestValueInTab(int sizeOfTab, int *tab )
 {
 	int biggestValue = 0;
@@ -68,14 +59,12 @@ int FindBiggestValueInTab(int sizeOfTab, int *tab )
 	return biggestValue;
 }
 
-/*---------------------------------------------------------------------------
-	GetIndexOfValue(int sizeOfTab, int *tab, int valueToLookFor)
-	-------------------------------------------------------------------------
-	Description	:	returns the index of the first occurence
-					of a specified value
-	Input		:	int array size, pointer to array, int valueToLookFor 
-	output		:	int index of the first occurence of the value 
-*---------------------------------------------------------------------------*/
+
+///  Return the index of the first occurence of specified value
+/// @param sizeOfTab Size of array
+/// @param tab Array you're looking in
+/// @param valueToLookFor Value you're looking for
+/// @return index of first occurencce of specified value
 int GetIndexOfValue(int sizeOfTab, int *tab, int valueToLookFor)
 {
 	for (int i = 0; i < sizeOfTab; i++)
@@ -88,14 +77,10 @@ int GetIndexOfValue(int sizeOfTab, int *tab, int valueToLookFor)
 	return(-1);
 }
 
-/*---------------------------------------------------------------------------
-	ReplaceLastByBiggest(int sizeOfTab, int *tab)
-	-------------------------------------------------------------------------
-	Description	:	Replace the last value of the array by the biggest value
-					(exchange the last with biggest)
-	Input		:	int array size, pointer to array  
-	output		:	
-*---------------------------------------------------------------------------*/
+
+///  Replace the last value of the array by the biggest value (exchange the last with biggest)
+/// @param sizeOfTab Size of array
+/// @param tab Array to modify
 void ReplaceLastByBiggest(int sizeOfTab, int *tab)
 {
 	int biggest, biggestIndex, bufferLast;
