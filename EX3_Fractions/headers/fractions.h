@@ -4,12 +4,14 @@
 
 //http://malaspinas.academy/
 
-//############## Variables Globales et structs ##############
+//############## END GLOBALS AND STRUCTS ##############
 typedef struct 
 {
 	long num; //numerator
 	long den; //denominateur
 }fraction;
+//############## END GLOBALS AND STRUCTS ##############
+
 
 //############## FONCTIONS PROTOTYPES ##############
 void printFraction(fraction );
@@ -20,7 +22,7 @@ fraction fraction_add(fraction, fraction);
 fraction fraction_mul(fraction, fraction);
 fraction fraction_div(fraction, fraction);
 fraction fraction_sub(fraction, fraction);
-double fraction_to_double(fraction fr1);
+double fraction_to_double(fraction);
 //############## END FONCTIONS PROTOTYPES ##############
 
 #endif

@@ -9,25 +9,17 @@
 #include <math.h>
 #include "../headers/fractions.h"
 
-/*---------------------------------------------------------------------------
-	printFraction(fraction fr)
-	-------------------------------------------------------------------------
-	Description	:	Print a fraction in terminal
-	Input		:	fraction struct 
-	output		:	
-*---------------------------------------------------------------------------*/
+/// Print a fraction in terminal
+/// @param fr Fraction to print
 void printFraction(fraction fr)
 {
 	printf(" %ld / %ld ", fr.num, fr.den);
 }
 
-/*---------------------------------------------------------------------------
-	getPGCD(fraction fr)
-	-------------------------------------------------------------------------
-	Description	:	Get the PGCD of two numbers
-	Input		:	long number 1 | long number 2
-	output		:	long PGCD
-*---------------------------------------------------------------------------*/
+/// Return the PGCD of two numbers
+/// @param nb1 First number
+/// @param nb2 Second number
+/// @return pgcd
 long getPGCD(long nb1, long nb2)
 {
 	long x = nb1, y = nb2, rst;
@@ -41,13 +33,10 @@ long getPGCD(long nb1, long nb2)
 	return x;
 }
 
-/*---------------------------------------------------------------------------
-	reductFraction(fraction fr)
-	-------------------------------------------------------------------------
-	Description	:	get an irreductible version of the fraction
-	Input		:	struct fraction
-	output		:	struct fraction
-*---------------------------------------------------------------------------*/
+
+/// Return an irreductible version of the fraction
+/// @param fr Fraction to reduce
+/// @return reduced fraction 
 fraction reductFraction(fraction fr)
 {
 	fraction tempFr;
@@ -58,41 +47,35 @@ fraction reductFraction(fraction fr)
 	return tempFr;
 }
 
-/*---------------------------------------------------------------------------
-	powFr(fraction fr)
-	-------------------------------------------------------------------------
-	Description	:	return a poweredToNumber irreductible fraction
-	Input		:	struct fraction, long power 
-	output		:	struct fraction 
-*---------------------------------------------------------------------------*/
+/// Return a poweredToNumber irreductible fraction
+/// @param fr Fraction to power
+/// @param power Power to power to
+/// @return powered fraction 
 fraction powFr(fraction fr, long power)
 {
 	fraction tempFr = fr;
 	long temp;
 
-    if (power < 0)
-    {
+	if (power < 0)
+	{
 		// 1 / (2 / 4)^4 = 4^4 / 2^4
 		temp = pow(fr.num, power * -1);
-        tempFr.num = pow(fr.den, power * -1);
-        tempFr.den = temp;
-    }
-    else
-    {
-        tempFr.num = pow(fr.num, power);
-        tempFr.den = pow(fr.den, power);
-    }
+		tempFr.num = pow(fr.den, power * -1);
+		tempFr.den = temp;
+	}
+	else
+	{
+		tempFr.num = pow(fr.num, power);
+		tempFr.den = pow(fr.den, power);
+	}
 	
 	return reductFraction(tempFr);
 }
 
-/*---------------------------------------------------------------------------
-	fraction_add(fraction fr1, fraction fr2)
-	-------------------------------------------------------------------------
-	Description	:	Add and return a fraction
-	Input		:	struct fraction, struct fraction 2 
-	output		:	struct fraction 
-*---------------------------------------------------------------------------*/
+/// Add and return a fraction
+/// @param fr1 First fraction
+/// @param fr2 Second fraction
+/// @return added fractions
 fraction fraction_add(fraction fr1, fraction fr2)
 {
 	fraction returnFr;
@@ -105,13 +88,10 @@ fraction fraction_add(fraction fr1, fraction fr2)
 	return( reductFraction(returnFr) );
 }
 
-/*---------------------------------------------------------------------------
-	fraction_mul()(fraction fr1, fraction fr2)
-	-------------------------------------------------------------------------
-	Description	:	Multiply and return a fraction
-	Input		:	struct fraction, struct fraction 2 
-	output		:	struct fraction 
-*---------------------------------------------------------------------------*/
+/// Return multiplied fractions
+/// @param fr1 First fraction
+/// @param fr2 Second fraction
+/// @return added fractions
 fraction fraction_mul(fraction fr1, fraction fr2)
 {
 	fraction returnFr;
@@ -124,13 +104,10 @@ fraction fraction_mul(fraction fr1, fraction fr2)
 	return( reductFraction(returnFr) );
 }
 
-/*---------------------------------------------------------------------------
-	fraction_div(fraction fr1, fraction fr2)
-	-------------------------------------------------------------------------
-	Description	: 	Divide and return a fraction
-	Input		:	struct fraction, struct fraction 2
-	output		:	struct fraction 
-*---------------------------------------------------------------------------*/
+///  Return divided fractions
+/// @param fr1 First fraction
+/// @param fr2 Second fraction
+/// @return divided fractions
 fraction fraction_div(fraction fr1, fraction fr2)
 {
 	fraction returnFr;
@@ -143,13 +120,11 @@ fraction fraction_div(fraction fr1, fraction fr2)
 	return( reductFraction(returnFr) );
 }
 
-/*---------------------------------------------------------------------------
-	fraction_sub(fraction fr1, fraction fr2)
-	-------------------------------------------------------------------------
-	Description	:	substract and return a fraction
-	Input		:	struct fraction, struct fraction 2 
-	output		:	struct fraction 
-*---------------------------------------------------------------------------*/
+
+///  Return substracted fractions
+/// @param fr1 First fraction
+/// @param fr2 Second fraction
+/// @return substracted fractions
 fraction fraction_sub(fraction fr1, fraction fr2)
 {
 	fraction returnFr;
@@ -163,13 +138,9 @@ fraction fraction_sub(fraction fr1, fraction fr2)
 }
 
 
-/*---------------------------------------------------------------------------
-	fraction_to_double(fraction)
-	-------------------------------------------------------------------------
-	Description	:	get the real result of a fraction object
-	Input		:	fraction 
-	output		:	double  
-*---------------------------------------------------------------------------*/
+///  Return the result of a fraction
+/// @param fr1 First fraction
+/// @return A calculated double of the fraction
 double fraction_to_double(fraction fr1)
 {
 	return((double)fr1.num / (double)fr1.den);
