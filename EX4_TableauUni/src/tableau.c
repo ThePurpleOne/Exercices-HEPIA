@@ -6,6 +6,7 @@
 =*===========================================================================*/
 
 #include <stdio.h>
+#include <math.h>
 #include "../headers/tableau.h"
 
 ///  Print a tab
@@ -15,7 +16,7 @@ void PrintTab(int sizeOfTab, int *tab )
 {
 	for (long i = 0; i < sizeOfTab; i++)
 	{
-		printf("TAB[%ld] = %d\n", i, *(tab + i) );
+		printf("TAB[%.3ld] = %d\n", i, *(tab + i) );
 	}
 }
 
@@ -74,6 +75,7 @@ int GetIndexOfValue(int sizeOfTab, int *tab, int valueToLookFor)
 			return(i);
 		}
 	}
+	//not found
 	return(-1);
 }
 
@@ -100,6 +102,64 @@ void ReplaceLastByBiggest(int sizeOfTab, int *tab)
 
 }
 
+
+///  Return the average of values in a tab
+/// @param sizeOfTab Size of array
+/// @param tab Array you're making the average of
+/// @return the average of the values from the tab
+int GetAverage(int sizeOfTab, int *tab)
+{
+	int sum;
+	for (int i = 0; i < sizeOfTab; i++)
+	{
+		sum += *(tab + i);
+	}
+	return (sum / sizeOfTab);
+}
+
+///  Return the variance 
+/// @param sizeOfTab Size of array
+/// @param tab Array you're making the average of
+/// @param average average of the values from the tab  
+/// @return the variance of the values from the tab 
+int GetVariance(int sizeOfTab, int *tab, int average)
+{
+	float var;
+
+	for (int i = 0; i < sizeOfTab - 1; i++)
+	{
+		var += pow( (*(tab + i) - average), 2 );
+	}
+	return ( var / (float)sizeOfTab );
+}
+
+
+///  Bubble sort the array 
+/// @param sizeOfTab Size of array
+/// @param tab Array to modify
+void BubbleSort(int sizeOfTab, int *tab)
+{
+	#define SWAPPED 10
+	int swapped = SWAPPED;
+	int temp;
+
+	//elements still have been swapped ?
+	while (swapped == SWAPPED) 
+	{
+		swapped = 42; //random value to clear swapped	
+		for (size_t i = 0; i < sizeOfTab - 1; i++)
+		{
+			if( *(tab + i) > *(tab + i + 1 ) ) //first bigger than second ?
+			{
+				swapped = SWAPPED; //set the swapped flag
+				//swap elements
+				temp = *(tab + i);
+				*(tab + i) = *(tab + i + 1);
+				*(tab + i + 1) = temp;
+			}
+		}
+	}
+}
 
 
 
