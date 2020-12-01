@@ -11,10 +11,13 @@
 
 int main(int argc, char const *argv[])
 {
-	int size, valMax, smallest, biggest, indexOfFive;
+	int size, valMax, smallest, biggest, indexOfFive, valueToLookFor, averageOfValues, variance;
 
-	printf("De quelle taille doit être votre tableau?\nTaille : ");
+	printf("De quelle taille doit être votre tableau?\nTaille du tableau: ");
 	scanf("%d", &size);
+
+	printf("Quelle est la valeur recherchée\nValeur: ");
+	scanf("%d", &valueToLookFor);
 	
 	int tab1[size];
 	
@@ -26,27 +29,30 @@ int main(int argc, char const *argv[])
 		tab1[i] = rand() % valMax;
 	}
 
-	printf("Tableau avant Modifications\n");
-	PrintTab(size, tab1);
+	// printf("Tableau avant Modifications\n");
+	// PrintTab(size, tab1);
 	
 	smallest = FindSmallestValueInTab(size, tab1);
 	biggest = FindBiggestValueInTab(size, tab1);
-	indexOfFive = GetIndexOfValue(size, tab1, 5);
+	indexOfFive = GetIndexOfValue(size, tab1, valueToLookFor);
+	averageOfValues = GetAverage(size, tab1);
+	variance = GetVariance(size, tab1, averageOfValues);
 
-	printf("La plus petite valeur du tableau est  %d\n", smallest);
-	printf("La plus grande valeur du tableau est  %d\n", biggest); 
-	printf("L'index de la valeur 5 du tableau est %d\n", indexOfFive); 
-	
-
+	printf("\n\n[+ PETITE] = [%d]\n", smallest);
+	printf("[+ GRANDE] = [%d]\n", biggest); 
+	printf("[INDEX OF %d] = [%d]\n", valueToLookFor, indexOfFive); 
+	printf("[AVERAGE] = [%d]\n", averageOfValues); 
+	printf("[VARIANCE] = [%d]\n", variance); 
 
 	ReplaceLastByBiggest(size, tab1);
-	printf("Tableau apres Modifications\n");
+	printf("Dernière valeur échangée avec la plus grande!\n");
 	PrintTab(size, tab1);
 
+	BubbleSort(size, tab1);
+	printf("\n\n\n[Tableau trié]\n");
+	PrintTab(size, tab1);
 
-
-
-
+	//PrintTab(size, tab1);
 
 	return 0;
 }
