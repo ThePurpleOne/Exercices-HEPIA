@@ -7,24 +7,6 @@
 
 # coding: utf-8
 
-
-
-# with open("inputFile.txt", 'r', encoding=ENCODING_FORMAT) as inputFile:
-# 	textInput = inputFile.read()
-
-# print(textInput)
-
-# textOutput = ''.join(sorted(textInput))
-
-# for car in textOutput:
-# 	print(f"Car : {car}  Hex value : {hex(ord(car))}")
-
-
-# with open("outputText.txt", 'w', encoding=ENCODING_FORMAT) as outputText:
-# 	outputText.write(textOutput)
-
-
-
 def createAlphabeticallySortedFileFromFile(fileIn):
 	"""Sort a file in Alphabeticall order and put it in an other file
 
@@ -56,11 +38,12 @@ def createOccurenceSortedFileFromFile(fileIn):
 	for car in Counter(list(textInput)).most_common(): 
 		print(car[0] * car[1], end="")
 		textOutput += str(car[0] * car[1])
-		print(textOutput)
-	
 
 	with open("occurenceSorted" + fileIn, 'w', encoding=ENCODING_FORMAT) as outputText:
 		outputText.write(textOutput)
 
-# createAlphabeticallySortedFileFromFile("inputFile.txt")
+createAlphabeticallySortedFileFromFile("inputFile.txt")
 createOccurenceSortedFileFromFile("inputFile.txt")
+
+
+
