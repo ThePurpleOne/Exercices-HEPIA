@@ -1,107 +1,95 @@
 // https://www.twitch.tv/videos/820855594
 
 
-
-let NOMBRE_ETOILES = 10;
-let MAX_MASS = 10;
-let TAILLE = 10;
-let FRAMERATE = 10;
-
-let listeEtoiles = []; 
-let CST_G = 6.27e-11;
-let jez;
-let force;
+//Parameters
+let NOMBRE_ETOILES = 20;
+let MASS = 0.01;
+let TAILLE = 5;
+let FRAMERATE = 15;
 
 
+//Global Variables
+let starsList = []; 
+let CST_G = 6.674e-11;
+let summForces;
 
 function setup() 
 {
-	frameRate(1);
+	frameRate(FRAMERATE);
 	createCanvas(windowWidth, windowHeight);
+	//background(0);
 
-	print("Window Width : &{windowWidth}");
-	print("Window Height : &{windowHeight}");
-	background(0);
-
+	//Create random stars
 	for (let i = 0; i < NOMBRE_ETOILES; i++) 
 	{
-		// Create a list of "etoiles" with random mass and position Vector
-		listeEtoiles.push( new etoile() );
+		// Create a list of "stars" with random mass and position Vector
+		starsList.push( new etoile(createVector( random(500, windowWidth -500), random(0, windowHeight - 50), random(0.0001, MASS) )));
 	}
 
-
-	force = createVector(-10, -20);
-
-	print(computeForces(createVector(400, 600), createVector(50, 600)));
-
-	
+	//create a black hole
+	starsList.push(new etoile(createVector(windowWidth / 2, windowHeight / 2), 1000000));
+	summForces = createVector(0, 0);
 }
 
 
 function draw() 
 {
 	background(0);
-	
-	for (let i = 0; i < listeEtoiles.length; i++)
+	for (let i = 0; i < starsList.length; i++)
 	{
-		listeEtoiles[i].GetAccFromForce(force);
-		// print("Acceleration  de l'etoile "+ i +  ' ' + listeEtoiles[i].vecAcc);
-
-		listeEtoiles[i].update();
-
-		// print("Position X de l'etoile "+ i +  ' ' + listeEtoiles[i].vecPos.x);
-		// print("Position Y de l'etoile "+ i  + ' ' + listeEtoiles[i].vecPos.y )
-		// print("Velocity  de l'etoile "+ i  + ' ' + listeEtoiles[i].vecVel + "\n --------------------");
-
-		listeEtoiles[i].show();
+		//Summ up all the forces for each stars
+		for (let j = 0; j < starsList.length; j++)
+		{
+			if(j != i) //does not compute its own force
+			{
+				summForces.add(computeForce(starsList[j], starsList[i]));
+			}
+		}
+		
+		starsList[i].GetAccFromForce(summForces);
+		summForces.mult(0); //reset the summ
+		starsList[i].update();
+		starsList[i].show();
 	}
-
 }
 
-
-function computeForces(etoile1, etoile2)
+function computeForce(etoile1, etoile2)
 {
-	v1 = etoile1.vecPos;
-	v2 = etoile2.vecPos;
+	v1 = etoile1.vecPos.copy();
+	v2 = etoile2.vecPos.copy();
 
-	let tempVec = v1.sub(v2);
-	
-	let distVec = tempVec.mag();
+	let distVec = etoile1.vecPos.dist(etoile2.vecPos);
+	distVec.x = constrain(distVec.x, 100, 500);
+	distVec.y = constrain(distVec.y, 100, 500);
 
-	let result = (CST_G * etoile1.mass * etoile2.mas) / (distVec * distVec * distVec);
-	result *= tempVec;
-	return result ;
+	let force = v1.sub(v2);
+	force.setMag( (CST_G * etoile1.mass * etoile2.mass) / (distVec * distVec * distVec) );
+	return force;
 }
 
 class etoile 
 {
-	constructor()
+	constructor(_vecPos, _mass)
 	{
-		this.vecPos = createVector( random(100, windowWidth - 100 ), random(100, windowHeight - 100) );
-		//this.vecPos = createVector( 100, 300 );
-		this.mass = random(1, MAX_MASS);
+		this.vecPos = _vecPos;
+		this.mass = _mass;
 		this.vecAcc = createVector(0, 0);
 		this.vecVel = createVector(0, 0);
-
 	}
 
 	update()
 	{
 		this.vecVel.add(this.vecAcc);	//add the acc to get the velocity
 		this.vecPos.add(this.vecVel);	//Add vel to the current pos
-		
-		
+		this.vecAcc.mult(0);			//reset acc
 	}
 
 	GetAccFromForce(force)
 	{
-		this.vecAcc.mult(0);			//reset acc
-		let f = createVector();
-		f = createVector(-10, 1).div(this.mass);
+		let f = createVector(0, 0);
+		f = force.div(this.mass);
 		this.vecAcc.add( f );
 	}
-
-	
 
 	show()
 	{
@@ -110,35 +98,4 @@ class etoile
 	}
 
 }
-
-
-
-
-	// for (let i = 0; i < listeEtoiles.length; i++)
-	// {
-	// 	let bufferVec = createVector(0, 0);
-	// 	let summVec;
-	// 	let tempCalc;
-
-	// 	for (let j = 0; j < listeEtoiles.length; j++)
-	// 	{
-			
-	// 		if(j != i)
-	// 		{
-	// 			//add the 2 vectors to get
-	// 			bufferVec.add(listeEtoiles[i].vecPos);
-	// 			bufferVec.add(listeEtoiles[j].vecPos);
-	// 			tempCalc = CST_G * (listeEtoiles[i].mass + listeEtoiles[j].mass);
-	// 			summVec +=  tempCalc / pow(bufferVec.mag(), 2) ;//* listeEtoiles[i].vecVel;
-	// 		}
-	// 	}
-
-	// 	listeEtoiles[i].vecVel = summVec / listeEtoiles[i].mass;
-	// 	console.log(tempCalc / pow(bufferVec.mag(), 3) );
-	// 	listeEtoiles[i].update();
-	// 	listeEtoiles[i].show();
-		
-	
-
-	// }
 
